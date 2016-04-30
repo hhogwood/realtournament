@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController
+public class ControllableInterface
 {
     public MovementComponent Movement;    
 }
