@@ -8,7 +8,10 @@ public class PlayerInput : MonoBehaviour
     public CharacterActions PlayerAction = new CharacterActions();
     public InputState state;
 
-    private IControllable controlTarget;
+    public IControllable controlTarget;
+    
+    public InputBus InputBus;
+    public UseBus CurrentGun;
 
     public void SetTarget(IControllable target)
     {
@@ -42,14 +45,17 @@ public class PlayerInput : MonoBehaviour
         state.movement = PlayerAction.Move.Vector;
         state.rotation = PlayerAction.Look.Vector;
 
-        if(controlTarget != null)
+        if(PlayerAction.Fire.WasPressed)
         {
-            controlTarget.InputUpdate(state);
-            if(PlayerAction.Interact.WasPressed)
+            if(CurrentGun != null)
             {
-                Debug.Log("Should Fire");
-                controlTarget.GetGameObject().SendMessage("Use", SendMessageOptions.DontRequireReceiver);
+                CurrentGun.onUse();
             }
+        }
+        
+        if(InputBus != null)
+        {
+            InputBus.UpdateControl(state);
         }
     }
 }

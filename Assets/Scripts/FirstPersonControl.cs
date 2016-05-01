@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class FirstPersonControl : MonoBehaviour, IControllable
+public class FirstPersonControl : MonoBehaviour
 {
     public Camera pointOfView;
     public Transform cameraPivot;
@@ -13,6 +13,8 @@ public class FirstPersonControl : MonoBehaviour, IControllable
 
     public float minAngle = -45;
     public float maxAngle = 45;
+    
+    private InputBus InputBus;
 
     private Vector3 rotation;
     private Vector3 movement;
@@ -24,6 +26,12 @@ public class FirstPersonControl : MonoBehaviour, IControllable
     public Vector3 eulerAngles;
 
     // Use this for initialization
+    
+    void Awake()
+    {
+        InputBus = GetComponent<InputBus>();
+        InputBus.Subscribe(InputUpdate);
+    }
     void Start()
     {
 
@@ -55,23 +63,16 @@ public class FirstPersonControl : MonoBehaviour, IControllable
         movementForce *= movementSpeed * Time.fixedDeltaTime;
         body.AddForce(movementForce, forceMode);
     }
-
-    void IControllable.InputUpdate(InputState state)
+    
+    void InputUpdate(InputState state)
     {
         rotation = state.rotation;
         movement = state.movement;
     }
-
-    void Selected()
+    
+    void OnDestroy()
     {
-        pointOfView.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    void Deselected()
-    {
-        pointOfView.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
+        InputBus.UnSubscribe(InputUpdate);
     }
 
     public GameObject GetGameObject()

@@ -6,11 +6,22 @@ public class Useable : MonoBehaviour
 {
     public UnityEngine.Events.UnityEvent action;
 
+    private UseBus useBus;
+    
+    void Awake()
+    {
+        useBus = GetComponentInParent<UseBus>();
+        useBus.Subscribe(Use);
+    }
+
     public void Use()
     {
-        Debug.Log("Recieved use message");
-        if(action != null)
-            action.Invoke();
+        if(action != null) action.Invoke();
+    }
+    
+    void OnDestroy()
+    {
+        useBus.UnSubscribe(Use);
     }
 
 }
