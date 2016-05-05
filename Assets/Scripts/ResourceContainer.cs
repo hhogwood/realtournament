@@ -1,8 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class ResourceContainer
+
+public class ResourceContainer : MonoBehaviour
 {
-    public Dictionary<string, int> Resources = new Dictionary<string, int>();
+    //dumb garbage to serialize the dictionary
+    [System.Serializable()]
+    public class SerializableDictionary : SerializableDictionaryBase<string, int>
+    {
+
+    }
+    public SerializableDictionary Resources = new SerializableDictionary();
     
     public void Add(Resource _resource, int _amount)
     {
@@ -24,21 +31,21 @@ public class ResourceContainer
         Mathf.Min(Resources[_name], 0);
     }
     
-    public int Consume(Resource _resource, int _amount)
+    public int Consume(string _resource, int _amount)
     {
         int _amountGot = 0;
         
-        if(Resources.ContainsKey(_resource.Name))
+        if(Resources.ContainsKey(_resource))
         {
-            if((Resources[_resource.Name] - _amount) > 0)
+            if((Resources[_resource] - _amount) > 0)
             {
-                Resources[_resource.Name] -= _amount;
+                Resources[_resource] -= _amount;
                 _amountGot = _amount;
             }
             else
             {
-                _amountGot = _amount - Mathf.Abs(Resources[_resource.Name] - _amount);
-                Resources[_resource.Name] = 0;
+                _amountGot = _amount - Mathf.Abs(Resources[_resource] - _amount);
+                Resources[_resource] = 0;
             }
         }
         
@@ -52,5 +59,6 @@ public class ResourceContainer
             _targetResourceContainer.Add(kvp.Key, kvp.Value);
         }
     }
+
     
 }
