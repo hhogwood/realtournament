@@ -18,8 +18,11 @@ public class GameObjectSpawner : MonoBehaviour
 	    
 	}
 
-    public void Spawn()
+    public void Activate()
     {
-        Instantiate(ObjectToSpawn).gameObject.transform.position = SpawnPoint.position;
+        GameObject obj;
+        obj = Instantiate(ObjectToSpawn);
+        obj.transform.position = SpawnPoint.position;
+        obj.transform.rotation = SpawnPoint.rotation;
     }
 }

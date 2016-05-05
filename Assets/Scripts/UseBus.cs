@@ -25,7 +25,7 @@ public class UseBus : MonoBehaviour
 		onUse -= _onUse;
 	}
 	
-	public void UpdateControl(OnUse _onUse)
+	public void Use()
 	{
 		if(onUse != null)
 		{

@@ -49,7 +49,7 @@ public class PlayerInput : MonoBehaviour
         {
             if(CurrentGun != null)
             {
-                CurrentGun.onUse();
+                CurrentGun.Use();
             }
         }
         
