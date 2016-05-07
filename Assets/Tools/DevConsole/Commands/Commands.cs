@@ -4,7 +4,9 @@
 		public delegate void ConsoleMethod();
 		
 		public Command (string name, ConsoleMethod method):base(name, method){}
-        public Command(string name, string _varName, VariableType _varType, object _obj) : base(name, _varName, _varType, _obj) {}
+
+        /// <summary>This is how you add a variable to the Console</summary>
+        public Command(string _cmdName, string _varName, VariableType _varType, object _objRef) : base(_cmdName, _varName, _varType, _objRef) {}
         public Command (string name, ConsoleMethod method, string helpText):base(name, method, helpText){}
 		public Command (string name, ConsoleMethod method, HelpMethod helpMethod):base(name, method, helpMethod){}
 		public Command (ConsoleMethod method):base(method){}

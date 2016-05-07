@@ -171,21 +171,24 @@ namespace DevConsole{
 				if (current.type == EventType.keyDown){
 					if (!string.IsNullOrEmpty(inputText)){
 						switch(current.keyCode){
-						case KeyCode.Return:
-							PrintInput(inputText);
-							break;
-						case KeyCode.Tab:
-							if (candidates.Count !=0){
-								inputText = candidates[selectedCandidate];
-								showHelp = false;
-								SetCursorPos(inputText, inputText.Length);
-								candidates.Clear();
-							}
-							break;
-						case KeyCode.Escape:
-							showHelp = false;
-							candidates.Clear();
-							break;
+                        case KeyCode.Return:
+                            if (candidates.Count != 0 && showHelp == true)
+                            {
+                                inputText = candidates[selectedCandidate];
+                                showHelp = false;
+                                SetCursorPos(inputText, inputText.Length);
+                                candidates.Clear();
+                            }
+
+                            if (showHelp == false)
+                            {
+                                PrintInput(inputText);
+                            }
+                            break;
+                        case KeyCode.Escape:
+						    showHelp = false;
+						    candidates.Clear();
+						    break;
 						case KeyCode.F1:
 							showHelp = true;
 							break;
