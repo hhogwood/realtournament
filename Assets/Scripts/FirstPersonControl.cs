@@ -15,7 +15,7 @@ public class FirstPersonControl : MonoBehaviour
     public float minAngle = -45;
     public float maxAngle = 45;
     
-    private InputBus InputBus;
+    private ControlBus InputBus;
 
     private Vector3 rotation;
     private Vector3 movement;
@@ -83,7 +83,7 @@ public class FirstPersonControl : MonoBehaviour
 
     void Awake()
     {
-        InputBus = GetComponent<InputBus>();
+        InputBus = GetComponent<ControlBus>();
         InputBus.Subscribe(InputUpdate);
 
         myTransform = gameObject.transform;
@@ -217,7 +217,7 @@ public class FirstPersonControl : MonoBehaviour
         grounded = (controller.Move(moveDirection * Time.deltaTime) & CollisionFlags.Below) != 0;
     }
     
-    void InputUpdate(InputState state)
+    void InputUpdate(ControlState state)
     {
         rotation = state.rotation;
         movement = state.movement;

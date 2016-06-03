@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class InputBus : MonoBehaviour 
+public class ControlBus : MonoBehaviour 
 {
 	private OnControlUpdate ControlUpdate;
 	// Use this for initialization
@@ -25,13 +25,20 @@ public class InputBus : MonoBehaviour
 		ControlUpdate -= _controlUpdate;
 	}
 	
-	public void UpdateControl(InputState _inputState)
+	public void UpdateControl(ControlState _controlState)
 	{
 		if(ControlUpdate != null)
 		{
-			ControlUpdate.Invoke(_inputState);
+			ControlUpdate.Invoke(_controlState);
 		}
 	}
 }
 
-public delegate void OnControlUpdate(InputState _inputState);
+public delegate void OnControlUpdate(ControlState _controlState);
+
+[System.Serializable]
+public class ControlState
+{
+    public Vector3 movement;
+    public Vector3 rotation;
+}

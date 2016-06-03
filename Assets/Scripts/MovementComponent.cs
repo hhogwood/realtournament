@@ -23,7 +23,7 @@ public class MovementComponent : MonoBehaviour, IControllable
         moveForce = Vector3.zero;
     }
 
-    public void InputUpdate(InputState state)
+    public void InputUpdate(ControlState state)
     {
         Move(state.movement);
     }

@@ -6,11 +6,11 @@ using System.Collections.Generic;
 public class PlayerInput : MonoBehaviour
 {
     public CharacterActions PlayerAction = new CharacterActions();
-    public InputState state;
+    public ControlState state;
 
     public IControllable controlTarget;
     
-    public InputBus InputBus;
+    public ControlBus InputBus;
     public UseBus CurrentGun;
 
     public void SetTarget(IControllable target)
