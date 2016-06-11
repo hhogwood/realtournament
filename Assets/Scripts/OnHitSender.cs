@@ -7,11 +7,12 @@ public class OnHitSender : MonoBehaviour
     public UnityEngine.Events.UnityEvent OnHitActions;
     public HitInfo Info;
     public List<string> TagsToIgnore = new List<string>();
+    private Rigidbody body;
 
     // Use this for initialization
     void Start()
     {
-
+        body = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -43,6 +44,8 @@ public class OnHitSender : MonoBehaviour
 
             if (otherBus != null)
             {
+                Info.Velocity = body.velocity;
+                Info.CollisionData = other;
                 otherBus.Hit(Info);
             }
         }

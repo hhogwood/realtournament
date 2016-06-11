@@ -25,4 +25,12 @@ public class GameObjectSpawner : MonoBehaviour
         obj.transform.position = SpawnPoint.position;
         obj.transform.rotation = SpawnPoint.rotation;
     }
+
+    public void Activate(Vector3 pos, Vector3 rot)
+    {
+        GameObject obj;
+        obj = Instantiate(ObjectToSpawn);
+        obj.transform.position = pos;
+        obj.transform.localRotation = Quaternion.Euler(rot);
+    }
 }
