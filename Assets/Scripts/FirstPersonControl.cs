@@ -92,8 +92,6 @@ public class FirstPersonControl : MonoBehaviour
         rayDistance = controller.height * .5f + controller.radius;
         slideLimit = controller.slopeLimit - .1f;
         jumpTimer = antiBunnyHopFactor;
-
-        DevConsole.Console.AddCommand(new DevConsole.Command("PLAYER_SPEED", "speed", DevConsole.VariableType.Float, this));
     }
     void Start()
     {

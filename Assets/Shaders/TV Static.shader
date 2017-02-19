@@ -1,4 +1,6 @@
-﻿//ddTVStatic shader: Daniel DeEntremont (dandeentremont@gmail.com)
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+//ddTVStatic shader: Daniel DeEntremont (dandeentremont@gmail.com)
 //Applies a television static noise in screen spaaaaaace
 //Options for noise colors, resolution, and scaling to camera
 
@@ -62,7 +64,7 @@ Shader "TVStatic"
 				o.texcoord0 = i.texcoord0;
 
 				//get the model's origin, so we can calculate the distance to camera (and scale the noise accordingly)
-				float4 modelOrigin = mul(_Object2World, float4(0.0, 0.0, 0.0, 1.0));
+				float4 modelOrigin = mul(unity_ObjectToWorld, float4(0.0, 0.0, 0.0, 1.0));
 
 				o.camDist.x = distance(_WorldSpaceCameraPos.xyz, modelOrigin.xyz);
 
